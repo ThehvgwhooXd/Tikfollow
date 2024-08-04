@@ -1,40 +1,24 @@
-window.addEventListener('load', function() {
+document.addEventListener('DOMContentLoaded', function() {
+    const generateButton = document.getElementById('generateButton');
     const loadingOverlay = document.getElementById('loadingOverlay');
-    const content = document.getElementById('content');
-    const loadingText = document.getElementById('loadingText');
-    const loadingBar = document.getElementById('loadingBar');
-    const toggleThemeButton = document.getElementById('toggleThemeButton');
-    
-    let progress = 0;
+    const result = document.getElementById('result');
 
-    // Dynamic loading text updates
-    const loadingMessages = [
-        'Loading resources...',
-        'Fetching data...',
-        'Almost there...',
-        'Preparing content...',
-        'Finalizing...'
-    ];
-    
-    let messageIndex = 0;
+    generateButton.addEventListener('click', function() {
+        loadingOverlay.classList.remove('hidden');
 
-    const loadingInterval = setInterval(() => {
-        progress += 10;
-        loadingBar.style.width = `${progress}%`;
+        // Simulate a loading process
+        setTimeout(function() {
+            loadingOverlay.classList.add('hidden');
+            const likes = Math.floor(Math.random() * 10000) + 1000;
+            const shares = Math.floor(Math.random() * 5000) + 500;
+            const follows = Math.floor(Math.random() * 3000) + 300;
 
-        if (progress >= 100) {
-            clearInterval(loadingInterval);
-            loadingOverlay.style.display = 'none';
-            content.style.display = 'block';
-        } else {
-            messageIndex = (messageIndex + 1) % loadingMessages.length;
-            loadingText.textContent = loadingMessages[messageIndex];
-        }
-    }, 1000);
-
-    // Theme toggle functionality
-    toggleThemeButton.addEventListener('click', () => {
-        document.body.classList.toggle('dark-mode');
-        document.body.classList.toggle('light-mode');
+            result.innerHTML = `
+                <p><strong>${likes}</strong> Likes generated!</p>
+                <p><strong>${shares}</strong> Shares generated!</p>
+                <p><strong>${follows}</strong> Follows generated!</p>
+            `;
+            result.classList.remove('hidden');
+        }, 3000); // Simulate a 3-second loading time
     });
 });
