@@ -1,26 +1,40 @@
-document.getElementById('generatorForm').addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent form submission
-
-    const username = document.getElementById('username').value;
-    const followers = document.getElementById('followers').value;
-
-    document.getElementById('user').innerText = username;
-    document.getElementById('progress').classList.remove('hidden');
-
+window.addEventListener('load', function() {
+    const loadingOverlay = document.getElementById('loadingOverlay');
+    const content = document.getElementById('content');
+    const loadingText = document.getElementById('loadingText');
+    const loadingBar = document.getElementById('loadingBar');
+    const toggleThemeButton = document.getElementById('toggleThemeButton');
+    
     let progress = 0;
-    const progressBar = document.querySelector('.progress');
 
-    // Fake progress bar animation
-    const interval = setInterval(() => {
-        if (progress < 100) {
-            progress += 5; // Increase progress
-            progressBar.style.width = progress + '%';
+    // Dynamic loading text updates
+    const loadingMessages = [
+        'Loading resources...',
+        'Fetching data...',
+        'Almost there...',
+        'Preparing content...',
+        'Finalizing...'
+    ];
+    
+    let messageIndex = 0;
+
+    const loadingInterval = setInterval(() => {
+        progress += 10;
+        loadingBar.style.width = `${progress}%`;
+
+        if (progress >= 100) {
+            clearInterval(loadingInterval);
+            loadingOverlay.style.display = 'none';
+            content.style.display = 'block';
         } else {
-            clearInterval(interval);
-            alert(`Successfully added ${followers} followers to ${username}!`);
-            document.getElementById('progress').classList.add('hidden');
-            document.getElementById('generatorForm').reset();
-            progressBar.style.width = '0';
+            messageIndex = (messageIndex + 1) % loadingMessages.length;
+            loadingText.textContent = loadingMessages[messageIndex];
         }
-    }, 200); // Interval for updating progress
+    }, 1000);
+
+    // Theme toggle functionality
+    toggleThemeButton.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+        document.body.classList.toggle('light-mode');
+    });
 });
