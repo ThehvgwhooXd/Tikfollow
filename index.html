@@ -3,24 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Advanced Loading System</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>Fake TikTok Generator</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body class="light-mode">
-    <div class="loading-overlay" id="loadingOverlay">
-        <div class="spinner-container">
-            <div class="spinner"></div>
-            <div class="loading-bar-container">
-                <div class="loading-bar" id="loadingBar"></div>
-            </div>
-            <p id="loadingText">Loading, please wait...</p>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="images/logo.png" alt="TikTok Logo" class="logo">
+            <h1>Fake TikTok Generator</h1>
         </div>
-    </div>
-    <div class="content" id="content">
-        <h1>Welcome to the Website</h1>
-        <p>This is the main content of the page, which is displayed after loading.</p>
-        <button id="toggleThemeButton">Toggle Theme</button>
+        <div class="generator">
+            <button id="generateButton">Generate Likes, Shares, and Follows</button>
+            <div id="loadingOverlay" class="loading-overlay hidden">
+                <div class="spinner"></div>
+                <p id="loadingText">Generating...</p>
+            </div>
+            <div id="result" class="hidden"></div>
+        </div>
     </div>
     <script src="script.js"></script>
 </body>
